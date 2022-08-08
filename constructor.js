@@ -64,9 +64,11 @@ let tableEl = document.createElement('table');
     // tableEl.style.border = '3px solid black';
 
     tableEl.style.fontFamily = 'Arial, Helvetica, sans-serif';
+    tableEl.style.fontFamily = 'Ibarra Real Nova, serif';
+    tableEl.style.fontFamily = 'Mouse Memoirs, sans-serif';
     tableEl.style.borderCollapse = 'collapse';
     tableEl.style.width= '70%';
-    tableEl.style.margin = '30px 110px'
+    tableEl.style.margin = '30px 260px'
 
     tableRow.style.border = '1px solid #ddd';
     tableRow.style.padding = '8px';
