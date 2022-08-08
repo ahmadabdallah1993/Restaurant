@@ -65,7 +65,8 @@ let tableEl = document.createElement('table');
 
     tableEl.style.fontFamily = 'Arial, Helvetica, sans-serif';
     tableEl.style.borderCollapse = 'collapse';
-    tableEl.style.width= '80%';
+    tableEl.style.width= '70%';
+    tableEl.style.margin = '30px 110px'
 
     tableRow.style.border = '1px solid #ddd';
     tableRow.style.padding = '8px';
@@ -99,17 +100,12 @@ Foods.prototype.render = function() {
         tableData3.style.padding = '8px';
 
         let tableData4 = document.createElement('th');
-        tableData4.textContent = `${this.price}`;
+        tableData4.textContent = `${this.price} JD`;
         tableRow2.appendChild(tableData4);
         tableData4.style.border = '1px solid #ddd';
         tableData4.style.padding = '8px';
 
 
-
-        
-
-
-    
 
 }
 
