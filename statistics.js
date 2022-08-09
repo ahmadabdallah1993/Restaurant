@@ -55,8 +55,6 @@ let tableEl = document.createElement('table');
     tableHeader4.style.padding = '8px';
 
 
-   
-
 
     tableEl.style.fontFamily = 'Arial, Helvetica, sans-serif';
     tableEl.style.fontFamily = 'Ibarra Real Nova, serif';
@@ -108,13 +106,16 @@ Foods.prototype.render = function() {
 
 
 
+
+
+
 let formEl = document.getElementById('form');
 
 formEl.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
     event.preventDefault();
-    //console.log(event);
+    console.log(event);
 
     let name = event.target.name.value;
     let selectt = event.target.select.value;
@@ -139,53 +140,70 @@ function handleSubmit(event) {
     newItem.foodID();
     //console.log(foodArray);
 
-    
+
+
     
     //newItem.render();
 
 
-
-
     saveData(newItem);
+
 }
+
+
+
+
+    
+
+
 
 
 
 function saveData(data) {
     let stringObj = JSON.stringify(data);
-   
-        localStorage.setItem("item", stringObj);
-    
+    localStorage.setItem('item', stringObj);
+
+    getData();
     
 }
 
+let j = 0;
 
 function getData() {
-    let retreveData = localStorage.getItem('item');
     
+    let retreveData = localStorage.getItem('item');
     let dataArray = JSON.parse(retreveData);
 
-    //if(dataArray != null) {
+    console.log(dataArray);
 
-  
+    if(dataArray != null) {
+        for(let i = 0; i <dataArray.length; i ++) {
+            new Foods(dataArray[i].foodName, dataArray[i].type, dataArray[i].price);
+            dataArray[i].foodID();
+            
+            //dataArray[i].render();
+
+        }
+
+        // let newLsItem = new Foods(dataArray.foodName, dataArray.type, dataArray.price);
+
+        // newLsItem.foodID();
         
+        // newLsItem.render();   
+
+        //foodArray.push(newLsItem)
+
+        
+    }
+
     
-        let newLsItem = new Foods(dataArray.foodName, dataArray.type, dataArray.price);
-
-        newLsItem.foodID();
-
-        //foodArray.push(newLsItem);
-
-        
-        //newLsItem.render();
-        
-
-
-        
+    //localStorage.clear();
+    for(let i = j; i < foodArray.length; i ++) {
+        foodArray[i].render();
+        j++;
+    }
     
     
 }
 
-getData();
-
-
+//getData();
