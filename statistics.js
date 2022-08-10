@@ -137,7 +137,7 @@ function getData() {
 }
 
 
-getData();
+//getData();
 render(getData);
 
 //localStorage.clear();
