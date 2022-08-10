@@ -1,29 +1,21 @@
+
 'use strict';
 
-const foodArray = [];
 
 
-function Foods(foodName, type, price) {
-    this.foodName = foodName;
-    this.type = type;
-    this.price = price;
+
+// const bodyEl = document.getElementsByTagName('body');
 
 
-    foodArray.push(this);
-};
-
-
-let i = 1000;
-Foods.prototype.foodID = function() {
-    this.foodID = i;
-    i ++
+let w = 999;
+function foodID() {
+    w++;
+    return w;
+   
 }
 
 
-const bodyEl = document.getElementsByTagName('body');
-
-
-
+const mains = document.getElementById('main');
 
 let tableEl = document.createElement('table');
     bodyEl[0].appendChild(tableEl);
@@ -67,9 +59,13 @@ let tableEl = document.createElement('table');
     tableRow.style.padding = '8px';
 
 
-Foods.prototype.render = function() {
+function render(getData) {
   
-        let tableRow2 = document.createElement('tr');
+let data = getData();
+
+for(let i = 0; i < data.length; i ++) {
+
+    let tableRow2 = document.createElement('tr');
         tableEl.appendChild(tableRow2);
 
         tableRow2.style.border = '1px solid #ddd';
@@ -77,25 +73,25 @@ Foods.prototype.render = function() {
         
 
         let tableData = document.createElement('td');
-        tableData.textContent = `${this.foodID}`;
+        tableData.textContent = foodID();
         tableRow2.appendChild(tableData);
         tableData.style.border = '1px solid #ddd';
         tableData.style.padding = '8px';
 
         let tableData2 = document.createElement('td');
-        tableData2.textContent = `${this.foodName}`;
+        tableData2.textContent = data[i].foodName;
         tableRow2.appendChild(tableData2);
         tableData2.style.border = '1px solid #ddd';
         tableData2.style.padding = '8px';
 
         let tableData3 = document.createElement('td');
-        tableData3.textContent = `${this.type}`;
+        tableData3.textContent = data[i].type;
         tableRow2.appendChild(tableData3);
         tableData3.style.border = '1px solid #ddd';
         tableData3.style.padding = '8px';
 
         let tableData4 = document.createElement('th');
-        tableData4.textContent = `${this.price} JD`;
+        tableData4.textContent = data[i].price;
         tableRow2.appendChild(tableData4);
         tableData4.style.border = '1px solid #ddd';
         tableData4.style.padding = '8px';
@@ -103,75 +99,18 @@ Foods.prototype.render = function() {
 
 
 }
-
-
-
-
-
-
-let formEl = document.getElementById('form');
-
-formEl.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
-    event.preventDefault();
-    console.log(event);
-
-    let name = event.target.name.value;
-    let selectt = event.target.select.value;
-    let price = event.target.price.value;
-    //console.log(name,selectt, price);
-
-    if(selectt == 1) {
-        selectt = "Fruit and Vegetables";
-    }else if(selectt == 2) {
-        selectt = "Starchy Food";
-    }else if(selectt == 3) {
-        selectt = "Diary";
-    }else if(selectt == 4) {
-        selectt = "Protein";
-    }else if(selectt == 5) {
-        selectt = "Fat";
-    }
-    //console.log(name,selectt, price);
-
-
-    let newItem = new Foods(name, selectt, price);
-    newItem.foodID();
-    //console.log(foodArray);
-
-
-
-    
-    //newItem.render();
-
-
-    saveData(newItem);
+        
 
 }
 
 
-
-
-    
-
-
-
-
-
-function saveData(data) {
-    let stringObj = JSON.stringify(data);
-    localStorage.setItem('item', stringObj);
-
-    getData();
-    
-}
 
 let j = 0;
 
 function getData() {
     
     let retreveData = localStorage.getItem('item');
+    console.log(retreveData)
     let dataArray = JSON.parse(retreveData);
 
     console.log(dataArray);
@@ -179,31 +118,26 @@ function getData() {
     if(dataArray != null) {
         for(let i = 0; i <dataArray.length; i ++) {
             new Foods(dataArray[i].foodName, dataArray[i].type, dataArray[i].price);
-            dataArray[i].foodID();
+            //dataArray[i].foodID();
             
-            //dataArray[i].render();
+            
 
         }
 
-        // let newLsItem = new Foods(dataArray.foodName, dataArray.type, dataArray.price);
-
-        // newLsItem.foodID();
-        
-        // newLsItem.render();   
-
-        //foodArray.push(newLsItem)
-
         
     }
-
+    return dataArray;
     
-    //localStorage.clear();
-    for(let i = j; i < foodArray.length; i ++) {
-        foodArray[i].render();
-        j++;
-    }
+    // for(let i = j; i < foodArray.length; i ++) {
+    //     foodArray[i].render();
+    //     j++;
+    // }
     
     
 }
 
-//getData();
+
+getData();
+render(getData);
+
+//localStorage.clear();
